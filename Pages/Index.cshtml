@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <br />
+    <form method="post">
+        <div class="col">
+            <p>Podaj liczbę</p>
+            <input asp-for="Number_Result.Number" class="form-control">
+            <b><span asp-validation-for="Number_Result.Number" class="text-danger"></span></b>
+            <br />
+        </div>
+        <button class="btn btn-primary" type="submit">Zatwierdź</button>
+    </form>
+    <br />
+
+    @if (Model.Number_Result != null && Model.Number_Result.Result != "")
+    {   
+<p>
+    <i>
+        Otrzymano:
+        @Model.Number_Result.Result
+    </i>
+</p>
+    }
+    else if (Model.Number_Result != null)
+    {
+<p>
+    <i>
+        Liczba:
+        @Model.Number_Result.Number
+        nie spełnia kryteriów FizzBuzz
+    </i>
+</p>
+    }
+</div>
+
