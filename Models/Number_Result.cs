@@ -8,7 +8,7 @@ namespace FizzBuzz.Models
 {
     public class Number_Result
     {
-        [Range(1, 1000, ErrorMessage ="Podaj liczbę z zakresu 1-1000"), Required(ErrorMessage = "Pole obowiązkowe")]
+        [Range(1, 1000, ErrorMessage ="Podaj liczbę z zakresu 1-1000"), Required]
         public int Number { get; set; }
 
         public String Result ="";
