@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using FizzBuzz.Data;
 
 namespace FizzBuzz.Pages
 {
@@ -18,11 +19,17 @@ namespace FizzBuzz.Pages
         [BindProperty(SupportsGet = true)]
         public Number_Result Number_Result { get; set; }
         public static List<Number_Result> PrevNum = new List<Number_Result>();
-        public IndexModel(ILogger<IndexModel> logger)
+        private readonly NumberContext _context;
+        public IList<Number_Result> Number_Results { get; set; }
+        public IndexModel(ILogger<IndexModel> logger, NumberContext context)
         {
             _logger = logger;
+            _context = context;
         }
-        public void OnGet() { }
+        public void OnGet() 
+        {
+            Number_Results = _context.Number_Result.ToList();
+        }
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
@@ -33,6 +40,10 @@ namespace FizzBuzz.Pages
                 PrevNum.Add(Number_Result);
 
                 HttpContext.Session.SetString("SessionNumber", JsonConvert.SerializeObject(PrevNum));
+
+                _context.Number_Result.Add(Number_Result);
+                _context.SaveChangesAsync();
+
             }
             return Page();
         }

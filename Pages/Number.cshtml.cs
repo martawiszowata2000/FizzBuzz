@@ -10,7 +10,7 @@ namespace FizzBuzz.Pages
     {
         public Number_Result Number_Result;
         public static List<Number_Result> PrevNum = new List<Number_Result>();
-        
+
         public void OnGet()
         {
             var SessionNumber = HttpContext.Session.GetString("SessionNumber");

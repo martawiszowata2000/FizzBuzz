@@ -1,0 +1,47 @@
+﻿@page
+@model FizzBuzz.Pages.Numbers.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Number_Results[0].Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number_Results[0].Result)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number_Results[0].Time)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = Model.Number_Results.Count-1;i>=Model.Number_Results.Count-10;i--)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Number_Results[i].Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Number_Results[i].Result)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Number_Results[i].Time)
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@Model.Number_Results[i].Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@Model.Number_Results[i].Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

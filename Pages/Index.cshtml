@@ -18,24 +18,24 @@
     </form>
     <br />
 
-    @if (Model.Number_Result != null && Model.Number_Result.Result != "")
-    {   
-<p>
-    <i>
-        Otrzymano:
-        @Model.Number_Result.Result
-    </i>
-</p>
-    }
-    else if (Model.Number_Result != null)
+    @if (Model.Number_Result != null && Model.Number_Result.Result != "" && Model.Number_Result.Result != null)
     {
-<p>
-    <i>
-        Liczba:
-        @Model.Number_Result.Number
-        nie spełnia kryteriów FizzBuzz
-    </i>
-</p>
+        <p>
+            <i>
+                Otrzymano:
+                @Model.Number_Result.Result
+            </i>
+        </p>
+    }
+    else if (Model.Number_Result != null && Model.Number_Result.Result == "")
+    {
+        <p>
+            <i>
+                Liczba:
+                @Model.Number_Result.Number
+                nie spełnia kryteriów FizzBuzz
+            </i>
+        </p>
     }
 </div>
 
