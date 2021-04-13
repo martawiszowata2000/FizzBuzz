@@ -23,6 +23,8 @@ namespace FizzBuzz.Pages.Numbers
         public async Task OnGetAsync()
         {
             Number_Results = await _context.Number_Result.ToListAsync();
+            var NumQuery = from Number_Results in _context.Number_Result orderby Number_Results.Time descending select Number_Results;
+            Number_Results = NumQuery.Take(10).ToList();
         }
     }
 }

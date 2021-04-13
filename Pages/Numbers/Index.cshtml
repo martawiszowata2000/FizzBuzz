@@ -25,21 +25,21 @@
         </tr>
     </thead>
     <tbody>
-        @for (int i = Model.Number_Results.Count-1;i>=Model.Number_Results.Count-10;i--)
+        @foreach (var item in Model.Number_Results)       
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(model => model.Number_Results[i].Number)
+                    @Html.DisplayFor(modelItem => item.Number)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.Number_Results[i].Result)
+                    @Html.DisplayFor(modelItem => item.Result)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.Number_Results[i].Time)
+                    @Html.DisplayFor(modelItem => item.Time)
                 </td>
                 <td>
-                    <a asp-page="./Details" asp-route-id="@Model.Number_Results[i].Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@Model.Number_Results[i].Id">Delete</a>
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
