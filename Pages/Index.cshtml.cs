@@ -2,14 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using FizzBuzz.Data;
+using Microsoft.AspNetCore.Identity;
+using FizzBuzz.Areas.Identity.Data;
 
 namespace FizzBuzz.Pages
 {
@@ -21,10 +20,16 @@ namespace FizzBuzz.Pages
         public static List<Number_Result> PrevNum = new List<Number_Result>();
         private readonly NumberContext _context;
         public IList<Number_Result> Number_Results { get; set; }
-        public IndexModel(ILogger<IndexModel> logger, NumberContext context)
+        private readonly UserManager<FizzBuzzUser> _userManager;
+        private readonly SignInManager<FizzBuzzUser> _signInManager;
+        public IndexModel(ILogger<IndexModel> logger, NumberContext context, 
+            UserManager<FizzBuzzUser> UserManager, SignInManager<FizzBuzzUser> SignInManager)
         {
             _logger = logger;
             _context = context;
+            _userManager = UserManager;
+            _signInManager = SignInManager;
+
         }
         public void OnGet() 
         {
@@ -36,6 +41,10 @@ namespace FizzBuzz.Pages
             {
                 Number_Result.Check(Number_Result.Number);
                 Number_Result.Time = System.DateTime.Now;
+                if(_signInManager.IsSignedIn(User))
+                {
+                    Number_Result.Owner = _userManager.GetUserName(User);
+                }
 
                 PrevNum.Add(Number_Result);
 

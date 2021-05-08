@@ -4,14 +4,16 @@ using FizzBuzz.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FizzBuzz.Migrations
 {
     [DbContext(typeof(NumberContext))]
-    partial class NumberContextModelSnapshot : ModelSnapshot
+    [Migration("20210508120035_FBowner")]
+    partial class FBowner
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -4,14 +4,16 @@ using FizzBuzz.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FizzBuzz.Migrations
 {
     [DbContext(typeof(NumberContext))]
-    partial class NumberContextModelSnapshot : ModelSnapshot
+    [Migration("20210507114507_AddDataAnnotation5")]
+    partial class AddDataAnnotation5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,8 +96,8 @@ namespace FizzBuzz.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<string>("Owner")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Result")
                         .HasColumnType("nvarchar(8)")
@@ -105,6 +107,8 @@ namespace FizzBuzz.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Number_Result");
                 });
@@ -242,6 +246,13 @@ namespace FizzBuzz.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("FizzBuzz.Models.Number_Result", b =>
+                {
+                    b.HasOne("FizzBuzz.Areas.Identity.Data.FizzBuzzUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
