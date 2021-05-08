@@ -1,4 +1,6 @@
-﻿using FizzBuzz.Models;
+﻿using FizzBuzz.Areas.Identity.Data;
+using FizzBuzz.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FizzBuzz.Data
 {
-    public class NumberContext : DbContext
+    public class NumberContext : IdentityDbContext<FizzBuzzUser>
     {
         public NumberContext() {}
         public NumberContext(DbContextOptions options) : base(options) { }

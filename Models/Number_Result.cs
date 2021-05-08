@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FizzBuzz.Areas.Identity.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace FizzBuzz.Models
         [MaxLength(8)]
         public String Result { get; set; }
         public DateTime Time { get;  set; }
+        public string Owner { get; set; }
         public String Check(int nr)
         {
             Result = "";

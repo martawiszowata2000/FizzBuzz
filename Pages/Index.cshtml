@@ -3,6 +3,11 @@
 @{
     ViewData["Title"] = "Home page";
 }
+@using Microsoft.AspNetCore.Identity
+@using FizzBuzz.Areas.Identity.Data
+
+@inject SignInManager<FizzBuzzUser> SignInManager
+@inject UserManager<FizzBuzzUser> UserManager
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -14,7 +19,9 @@
             <b><span asp-validation-for="Number_Result.Number" class="text-danger"></span></b>
             <br />
         </div>
+        
         <button class="btn btn-primary" type="submit">Zatwierdź</button>
+
     </form>
     <br />
 
@@ -37,5 +44,6 @@
             </i>
         </p>
     }
+    
 </div>
 

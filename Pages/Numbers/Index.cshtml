@@ -1,5 +1,10 @@
 ﻿@page
 @model FizzBuzz.Pages.Numbers.IndexModel
+@using Microsoft.AspNetCore.Identity
+@using FizzBuzz.Areas.Identity.Data
+
+@inject SignInManager<FizzBuzzUser> SignInManager
+@inject UserManager<FizzBuzzUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -21,27 +26,37 @@
             <th>
                 @Html.DisplayNameFor(model => model.Number_Results[0].Time)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number_Results[0].Owner)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Number_Results)       
+        @foreach (var item in Model.Number_Results)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Number)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Result)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Time)
-                </td>
-                <td>
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Result)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner)
+            </td>
+            <td>
+                
+                @if ((item.Owner != null) && (item.Owner == UserManager.GetUserName(User)))
+                {
                     <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+
+                }
+            </td>
+        </tr>
         }
     </tbody>
 </table>
